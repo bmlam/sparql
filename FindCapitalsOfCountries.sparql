@@ -1,0 +1,63 @@
+
+# find attribute for a capital
+select distinct ?property ?o {
+  { :Berlin ?property ?o }
+}
+
+#finds capital cities
+PREFIX yc: <http://dbpedia.org/class/yago/>
+select * {
+  { ?capital rdf:type yc:Capital108518505 . }
+}
+
+# return types of properties of capital cities 
+PREFIX yc: <http://dbpedia.org/class/yago/>
+select distinct ?prop {
+  ?capital rdf:type yc:Capital108518505 . 
+  ?s ?prop  ?capital . 
+}
+
+# dbpedia:ontology/campus [http]
+# dbpedia:ontology/capital [http]
+# dbpedia:ontology/city [http]
+# dbpedia:ontology/country [http]
+
+# this finds capitals of countries/states/provinces/regions
+PREFIX yc: <http://dbpedia.org/class/yago/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select * {
+  ?capital rdf:type yc:Capital108518505 . 
+  ?country dbo:capital  ?capital . 
+}
+
+# following finds capital of contemporary and historic countries 
+PREFIX yc: <http://dbpedia.org/class/yago/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select * {
+  ?capital rdf:type yc:Capital108518505 . 
+  ?region dbo:capital  ?capital . 
+  ?region  rdf:type dbo:Country
+}
+
+
+# :Cairo [http]	:Abbasid_Caliphate [http]
+# :Kabul [http]	:Democratic_Republic_of_Afghanistan [http]
+# :Cairo [http]	:Fatimid_Caliphate [http]
+# :Lisbon [http]	:History_of_Portugal_(1415–1578) [http]
+# :London [http]	:Thirteen_Colonies [http]
+# :Damascus [http]	:Umayyad_Caliphate [http]
+# :Amsterdam [http]	:United_Kingdom_of_the_Netherlands [http]
+# :Brussels [http]	:United_Kingdom_of_the_Netherlands [http]
+# :Brussels [http]	:Western_European_Union [http]
+# :Cebu_City [http]	:Rajahnate_of_Cebu [http]
+# :Zamboanga_City [http]	:Republic_of_Zamboanga [http]
+# :Damascus [http]	:Arab_Kingdom_of_Syria [http]
+# :Bishkek [http]	:Kirghiz_Soviet_Socialist_Republic [http]
+# :Luanda [http]	:Portuguese_Angola [http]
+# :Damascus [http]	:Syria [http]
+# :Damascus [http]	:Syrian_Republic_(1930–58) [http]
+# :Rosso [http]	:Emirate_of_Trarza [http]
+# :Nanjing [http]	:Reorganized_National_Government_of_the_Republic_of_China [http]
+# :Nanjing [http]	:Republic_of_China_(1912–49) [http]
+# :Kabul [http]	:Republic_of_Afghanistan [http]
+
