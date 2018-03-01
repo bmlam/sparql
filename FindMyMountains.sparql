@@ -1,0 +1,91 @@
+
+select distinct ?property ?o {
+  { :Mont_Blanc ?property ?o }
+}
+
+# returns
+property	o
+rdf:type [http]	owl:Thing [http]
+rdf:type [http]	dbpedia:ontology/Place [http]
+rdf:type [http]	dbpedia:ontology/Location [http]
+rdf:type [http]	<http://www.wikidata.org/entity/Q8502> [http]
+rdf:type [http]	dbpedia:ontology/Mountain [http]
+rdf:type [http]	dbpedia:ontology/NaturalPlace [http]
+
+JSON output which contains the altitude predicate:
+    { "property": { "type": "uri", "value": "http://dbpedia.org/ontology/elevation" }	, "o": { "type": "typed-literal", "datatype": "http://www.w3.org/2001/XMLSchema#double", "value": "4808.73" }},
+
+
+# here is a good start
+PREFIX ont:  <http://dbpedia.org/ontology/>
+select distinct ?s {
+  { ?s rdf:type ont:Mountain  }
+}
+
+# s
+# :Doomsday_Clock [http]
+# :Drumlin [http]
+# :Lonely_Mountain [http]
+# :Munro [http]
+# :Terence_Hill [http]
+# :Upcard [http]
+# :Coburn_Hill [http]
+# :Coburn_Mountain_(Maine) [http]
+# :Devil's_Thumb_(Greenland) [http]
+# :Haupt_(mountain) [http]
+# :Krim_(mountain) [http]
+# :Mount_Amara [http]
+# :Mount_Duval_(Nunavut) [http]
+# :Mount_Evil [http]
+# :Mount_Kamui_(Niikappu-Kasai) [http]
+# :Mount_Tsurugi_(Toyama) [http]
+# :Mount_Waugh [http]
+# :Pico_Bonpland [http]
+# :Purandar_fort [http]
+# :Razor_(mountain) [http]
+# :Schlossberg_(Brandenburg) [http]
+# 
+# and many many more!!
+
+
+# retrieve altitude:
+
+PREFIX ont:  <http://dbpedia.org/ontology/>
+select distinct ?mountain ?altitude {
+   ?mountain rdf:type ont:Mountain  .
+   OPTIONAL {
+      ?mountain ont:elevation ?altitude
+   }
+}
+
+# Voilà:
+
+
+# mountain	altitude
+# :Coburn_Hill [http]	1086.0
+# :Coburn_Mountain_(Maine) [http]	1132.94
+# :Devil's_Thumb_(Greenland) [http]	546.0
+# :Haupt_(mountain) [http]	2313.0
+# :Mount_Duval_(Nunavut) [http]	850.0
+# :Mount_Kamui_(Niikappu-Kasai) [http]	1756.1
+# :Mount_Tsurugi_(Toyama) [http]	2999.0
+# :Pico_Bonpland [http]	4883.0
+# :Purandar_fort [http]	1363.07
+
+
+# add World Geographic System attributes and filter
+
+#PREFIX wgs: <http://www.w3.org/2003/01/geo/>
+PREFIX ont:  <http://dbpedia.org/ontology/>
+#PREFIX wgs: <http://www.w3.org/2003/01/geo/>
+select distinct ?mountain ?altitude ?lat ?long {
+   ?mountain rdf:type ont:Mountain  .
+   ?mountain <http://www.w3.org/2003/01/geo/wgs84_pos#lat>  ?lat  .
+   ?mountain <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long  .
+   FILTER ( ?lat < 48.0 )
+   FILTER ( ?lat > 36.0 )
+   OPTIONAL {
+      ?mountain ont:elevation ?altitude
+   }
+}
+
