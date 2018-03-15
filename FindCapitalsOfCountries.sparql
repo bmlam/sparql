@@ -36,9 +36,221 @@ PREFIX dbo: <http://dbpedia.org/ontology/>
 select * {
   ?capital rdf:type yc:Capital108518505 . 
   ?region dbo:capital  ?capital . 
-  ?region  rdf:type dbo:Country
+  ?region  rdf:type <http://schema.org/Country>
 }
 
+# rdf type of things which can be a country:
+
+PREFIX yc: <http://dbpedia.org/class/yago/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select distinct ?rdfType {
+  ?capital rdf:type yc:Capital108518505 . 
+  ?region dbo:capital  ?capital . 
+  ?region  rdf:type ?rdfType
+  FILTER regex( ?rdfType, "country", "i" )
+  FILTER NOT EXISTS( regex( ?rdfType, "wikicat", "i" ) )
+}
+
+# good candidates in result
+<http://schema.org/Country>
+<http://dbpedia.org/class/yago/Country108544813>
+
+# capital of countries which are UN members
+
+PREFIX yc: <http://dbpedia.org/class/yago/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select * {
+  ?capital rdf:type yc:Capital108518505 . 
+  ?region dbo:capital  ?capital . 
+  ?region  rdf:type <http://dbpedia.org/class/yago/WikicatMemberStatesOfTheUnitedNations>
+}
+
+{ "head": { "link": [], "vars": ["capital", "region"] },
+  "results": { "distinct": false, "ordered": true, "bindings": [
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Praia" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Cape_Verde" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tirana" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Albania" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Abidjan" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Ivory_Coast" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Lusaka" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Zambia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Honiara" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Solomon_Islands" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Ngerulmud" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Palau" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Algiers" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Algeria" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Amsterdam" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Netherlands" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Amsterdam" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Kingdom_of_the_Netherlands" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Ankara" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Turkey" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Athens" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Greece" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Baghdad" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Iraq" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Baku" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Azerbaijan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Berlin" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Germany" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bishkek" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Kyrgyzstan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bras\u00EDlia" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Brazil" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Cairo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Egypt" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Cape_Town" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/South_Africa" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Copenhagen" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Denmark" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Damascus" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Syria" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Dublin" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Republic_of_Ireland" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Guatemala_City" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Guatemala" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Helsinki" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Finland" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Jakarta" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Indonesia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Jerusalem" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Israel" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Kabul" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Afghanistan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Kathmandu" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Nepal" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Khartoum" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Sudan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Kuala_Lumpur" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Malaysia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/London" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/United_Kingdom" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Luanda" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Angola" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Manama" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Bahrain" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Moscow" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Russia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Nairobi" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Kenya" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Nassau,_Bahamas" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/The_Bahamas" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Oslo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Norway" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Ottawa" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Canada" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Paris" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/France" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Prague" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Czech_Republic" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Pretoria" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/South_Africa" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Reykjav\u00EDk" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Iceland" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Riga" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Latvia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Rome" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Italy" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Stockholm" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Sweden" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Doha" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Qatar" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Abuja" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Nigeria" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Accra" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Ghana" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Addis_Ababa" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Ethiopia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Aden" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Yemen" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Amman" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Jordan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Andorra_la_Vella" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Andorra" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Antananarivo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Madagascar" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Apia" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Samoa" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Ashgabat" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Turkmenistan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Asmara" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Eritrea" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Astana" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Kazakhstan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Asunci\u00F3n" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Paraguay" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bamako" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Mali" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bandar_Seri_Begawan" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Brunei" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bangkok" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Thailand" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bangui" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Central_African_Republic" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Banjul" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/The_Gambia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Beirut" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Lebanon" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Belgrade" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Serbia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Belmopan" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Belize" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bern" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Switzerland" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bissau" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Guinea-Bissau" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bloemfontein" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/South_Africa" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Brazzaville" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Republic_of_the_Congo" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bridgetown" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Barbados" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bucharest" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Romania" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Budapest" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Hungary" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bujumbura" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Burundi" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Canberra" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Australia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Caracas" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Venezuela" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Castries" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Saint_Lucia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Chi\u0219in\u0103u" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Moldova" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Colombo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Sri_Lanka" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Dakar" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Senegal" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Dhaka" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Bangladesh" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Dili" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/East_Timor" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Dodoma" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Tanzania" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Dushanbe" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Tajikistan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Freetown" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Sierra_Leone" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Georgetown,_Guyana" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Guyana" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Hanoi" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Vietnam" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Harare" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Zimbabwe" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Havana" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Cuba" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Islamabad" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Pakistan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Kigali" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Rwanda" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Kingston,_Jamaica" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Jamaica" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Kinshasa" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Democratic_Republic_of_the_Congo" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Kuwait_City" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Kuwait" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Libreville" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Gabon" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Lilongwe" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Malawi" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Lima" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Peru" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Ljubljana" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Slovenia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Lom\u00E9" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Togo" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Malabo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Equatorial_Guinea" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Mal\u00E9" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Maldives" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Managua" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Nicaragua" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Maputo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Mozambique" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Maseru" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Lesotho" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Mbabane" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Swaziland" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Minsk" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Belarus" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Mogadishu" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Somalia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Montevideo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Uruguay" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Muscat,_Oman" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Oman" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/New_Delhi" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/India" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Niamey" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Niger" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Nicosia" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Cyprus" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Nouakchott" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Mauritania" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Nuku\u02BBalofa" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Tonga" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Ouagadougou" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Burkina_Faso" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Palikir" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Federated_States_of_Micronesia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Panama_City" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Panama" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Paramaribo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Suriname" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Phnom_Penh" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Cambodia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Port-au-Prince" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Haiti" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Port_Louis" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Mauritius" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Port_Moresby" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Papua_New_Guinea" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Port_Vila" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Vanuatu" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Porto-Novo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Benin" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Putrajaya" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Malaysia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Pyongyang" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/North_Korea" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Rabat" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Morocco" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Riyadh" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Saudi_Arabia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Roseau" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Dominica" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/San_Salvador" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/El_Salvador" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Santiago" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Chile" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Santo_Domingo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Dominican_Republic" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Skopje" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Republic_of_Macedonia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Sofia" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Bulgaria" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/St._George's,_Grenada" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Grenada" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tallinn" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Estonia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tashkent" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Uzbekistan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tbilisi" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Georgia_(country)" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tehran" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Iran" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Thimphu" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Bhutan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tokyo" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Japan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tunis" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Tunisia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Ulaanbaatar" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Mongolia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Vaduz" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Liechtenstein" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Valletta" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Malta" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Vienna" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Austria" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Vilnius" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Lithuania" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Warsaw" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Poland" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Washington,_D.C." }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/United_States" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Wellington" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/New_Zealand" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Windhoek" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Namibia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Yamoussoukro" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Ivory_Coast" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Yaound\u00E9" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Cameroon" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Yaren_District" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Nauru" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Yerevan" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Armenia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Zagreb" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Croatia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bogot\u00E1" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Colombia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Buenos_Aires" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Argentina" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/City_of_Brussels" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Belgium" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Kiev" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Ukraine" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Moroni,_Comoros" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Comoros" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Podgorica" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Montenegro" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Quito" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Ecuador" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/San_Jos\u00E9,_Costa_Rica" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Costa_Rica" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Sri_Jayawardenepura_Kotte" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Sri_Lanka" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tarawa" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Kiribati" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Victoria,_Seychelles" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Seychelles" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Djibouti_(city)" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Djibouti" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Lobamba" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Swaziland" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Naypyidaw" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Myanmar" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Majuro" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Marshall_Islands" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Suva" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Fiji" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Beijing" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/China" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Bratislava" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Slovakia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Juba" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/South_Sudan" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Seoul" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/South_Korea" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Abu_Dhabi" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/United_Arab_Emirates" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/City_of_San_Marino" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/San_Marino" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Luxembourg_City" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Luxembourg" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Madrid" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Spain" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Monrovia" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Liberia" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Sana'a" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Yemen" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Vientiane" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Laos" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Tegucigalpa" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Honduras" }},
+    { "capital": { "type": "uri", "value": "http://dbpedia.org/resource/Funafuti" }	, "region": { "type": "uri", "value": "http://dbpedia.org/resource/Tuvalu" }} ] } }
 
 # :Cairo [http]	:Abbasid_Caliphate [http]
 # :Kabul [http]	:Democratic_Republic_of_Afghanistan [http]
@@ -61,3 +273,29 @@ select * {
 # :Nanjing [http]	:Republic_of_China_(1912–49) [http]
 # :Kabul [http]	:Republic_of_Afghanistan [http]
 
+# find coordinates of capital cities of UN member countries
+PREFIX yc: <http://dbpedia.org/class/yago/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select * {
+  ?region  rdf:type <http://dbpedia.org/class/yago/WikicatMemberStatesOfTheUnitedNations>
+
+  OPTIONAL { 
+  ?capital rdf:type yc:Capital108518505 .    
+  ?region dbo:capital  ?capital . 
+   ?capital <http://www.w3.org/2003/01/geo/wgs84_pos#lat>  ?lat  .
+   ?capital <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long  .  }
+ 
+}
+
+# find rdf types available on capital cities
+PREFIX yc: <http://dbpedia.org/class/yago/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+select ?pred COUNT( ?pred ) as ?cnt {
+  ?region  rdf:type <http://dbpedia.org/class/yago/WikicatMemberStatesOfTheUnitedNations> .
+  ?region dbo:capital  ?capital . 
+  ?capital ?pred ?o .    
+
+}
+ ORDER BY desc( COUNT( ?pred ) )
+
+ 
